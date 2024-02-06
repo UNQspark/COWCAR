@@ -19,15 +19,15 @@ int motor2pin2 = 5;
 
 void setup() {
   
-	pinMode(trigPin, OUTPUT); // Sets the trigPin as an OUTPUT
-	pinMode(echoPin, INPUT); // Sets the echoPin as an INPUT
+  pinMode(trigPin, OUTPUT); // Sets the trigPin as an OUTPUT
+  pinMode(echoPin, INPUT); // Sets the echoPin as an INPUT
 
-	// Serial Communication is starting with 9600 of
-	// baudrate speed
-	Serial.begin(9600);
+  // Serial Communication is starting with 9600 of
+  // baudrate speed
+  Serial.begin(9600);
 
-	// The text to be printed in serial monitor
-	delay(500);
+  // The text to be printed in serial monitor
+  delay(500);
 
   // put your setup code here, to run once:
   pinMode(motor1pin1, OUTPUT);
@@ -43,24 +43,21 @@ void setup() {
 void loop() {
 
   digitalWrite(trigPin, LOW);
-	delayMicroseconds(2); // wait for 2 ms to avoid
-						// collision in serial monitor
+  delayMicroseconds(2); // wait for 2 ms to avoid collision in serial monitor
 
-	digitalWrite(trigPin,HIGH); // turn on the Trigger to generate pulse
-	delayMicroseconds(10); // keep the trigger "ON" for 10 ms to generate
-			// pulse for 10 ms.
+  digitalWrite(trigPin,HIGH); // turn on the Trigger to generate pulse
+  delayMicroseconds(10); // keep the trigger "ON" for 10 ms to generate pulse for 10 ms.
 
-	digitalWrite(trigPin,LOW); // Turn off the pulse trigger to stop
-					// pulse generation
+  digitalWrite(trigPin,LOW); // Turn off the pulse trigger to stop pulse generation
 
-	// If pulse reached the receiver echoPin
-	// become high Then pulseIn() returns the
-	// time taken by the pulse to reach the
-	// receiver
+  // If pulse reached the receiver echoPin
+  // become high Then pulseIn() returns the
+  // time taken by the pulse to reach the
+  // receiver
 
-	duration = pulseIn(echoPin, HIGH);
-	distance = duration * 0.0344 / 2; // Expression to calculate , distance using time
-	delay(100);
+  duration = pulseIn(echoPin, HIGH);
+  distance = duration * 0.0344 / 2; // Expression to calculate , distance using time
+  delay(100);
 
   //Controlling speed (0   = off and 255 = max speed):     
   analogWrite(9, 100); //ENA   pin
