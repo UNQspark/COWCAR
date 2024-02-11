@@ -1,8 +1,6 @@
 // distance measure code
-#define echoPin										 \
-	2 // attach pin D2 Arduino to pin Echo of HC-SR04
-#define trigPin										 \
-	3 // attach pin D3 Arduino to pin Trig of HC-SR04										 \
+#define echoPin 3 
+#define trigPin	2 
 
 
 long duration; // Variable to store time taken to the pulse
@@ -13,8 +11,7 @@ int distance; // Variable to store distance calculated using
 
 void setup()
 {
-	pinMode(trigPin,
-			OUTPUT); // Sets the trigPin as an OUTPUT
+	pinMode(trigPin, OUTPUT); // Sets the trigPin as an OUTPUT
 	pinMode(echoPin, INPUT); // Sets the echoPin as an INPUT
 
 	// Serial Communication is starting with 9600 of
@@ -22,8 +19,7 @@ void setup()
 	Serial.begin(9600);
 
 	// The text to be printed in serial monitor
-	Serial.println(
-		"Distance measurement using Arduino Uno.");
+	Serial.println("Distance measurement using Arduino Uno.");
 	delay(500);
 }
 
@@ -33,15 +29,11 @@ void loop()
 	delayMicroseconds(2); // wait for 2 ms to avoid
 						// collision in serial monitor
 
-	digitalWrite(
-		trigPin,
-		HIGH); // turn on the Trigger to generate pulse
-	delayMicroseconds(
-		10); // keep the trigger "ON" for 10 ms to generate
+	digitalWrite(trigPin, HIGH); // turn on the Trigger to generate pulse
+	delayMicroseconds(10); // keep the trigger "ON" for 10 ms to generate
 			// pulse for 10 ms.
 
-	digitalWrite(trigPin,
-				LOW); // Turn off the pulse trigger to stop
+	digitalWrite(trigPin, LOW); // Turn off the pulse trigger to stop
 					// pulse generation
 
 	// If pulse reached the receiver echoPin
