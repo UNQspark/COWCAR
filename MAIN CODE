@@ -11,22 +11,6 @@
 #define trigPin_E  11
 
 
-//Variables to store time taken to the pulse
-long duration_N; 
-long duration_NW; 
-long duration_NE; 
-long duration_W; 
-long duration_E; 
-
-
-//Variables to store distance calculated using
-int distance_N;
-int distance_NW; 
-int distance_NE; 
-int distance_W; 
-int distance_E; 
-
-
 //Variables to store the pins the motors are connected to
 int motor1pin1 = 23;
 int motor1pin2 = 24;
