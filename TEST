@@ -35,6 +35,7 @@ void loop() {
 void definePin(int trig,int echo){
   pinMode(trig, OUTPUT); // Sets the trigPin as an OUTPUT
   pinMode(echo, INPUT);  // Sets the echoPin as an INPUT
+  Serial.println("DEFINE PIN PASS");
 }
 
 int distanceMeasure(int echoPin,int trigPin){
