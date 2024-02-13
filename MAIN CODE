@@ -18,60 +18,79 @@ int motor1pin2 = 24;
 int motor2pin1 = 25;
 int motor2pin2 = 26;
 
+//Variables to store the distance for each sensors
+int distance_N;
+int distance_NW;
+int distance_NE;
+int distance_W;
+int distance_E;
+
+
 void setup() {
-  
-  // Setting the echo/trig pin to their respective OUTPUT/INPUT
-  definePin(echoPin_N,trigPin_N);
-  definePin(echoPin_NW,trigPin_NW);
-  definePin(echoPin_NE,trigPin_NE);
-  definePin(echoPin_W,trigPin_W);
-  definePin(echoPin_E,trigPin_E);
+    
+    // Setting the echo/trig pin to their respective OUTPUT/INPUT
+    definePin(echoPin_N,trigPin_N);
+    definePin(echoPin_NW,trigPin_NW);
+    definePin(echoPin_NE,trigPin_NE);
+    definePin(echoPin_W,trigPin_W);
+    definePin(echoPin_E,trigPin_E);
 
 
-  // Serial Communication is starting with 9600 of
-  // baudrate speed
-  Serial.begin(9600);
+    // Serial Communication is starting with 9600 of
+    // baudrate speed
+    Serial.begin(9600);
 
-  // The text to be printed in serial monitor
-  delay(500);
+    delay(500);
 
-  // put your setup code here, to run once:
-  pinMode(motor1pin1, OUTPUT);
-  pinMode(motor1pin2, OUTPUT);
-  pinMode(motor2pin1, OUTPUT);
-  pinMode(motor2pin2, OUTPUT);
+    pinMode(motor1pin1, OUTPUT);
+    pinMode(motor1pin2, OUTPUT);
+    pinMode(motor2pin1, OUTPUT);
+    pinMode(motor2pin2, OUTPUT);
 
-  // pins for speed control
-  pinMode(40, OUTPUT); 
-  pinMode(41, OUTPUT);
+    // pins for speed control
+    pinMode(40, OUTPUT); 
+    pinMode(41, OUTPUT);
 }
 
 void loop() {
 
-  //Controlling speed (0   = off and 255 = max speed):     
-  analogWrite(9, 100); //ENA   pin
-  analogWrite(10, 200); //ENB pin
+    distance_N = distanceMeasure(2,3);
+    distance_NW = distanceMeasure(4,5);
+    distance_NE = distanceMeasure(6,7);
+    distance_W = distanceMeasure(8,9);
+    distance_E = distanceMeasure(10,11);
+
+    //Clockwise motion
+    digitalWrite(motor1pin1, HIGH);
+    digitalWrite(motor1pin2, LOW);
+    digitalWrite(motor2pin1, HIGH);
+    digitalWrite(motor2pin2, LOW);
+
+    while(){
+        analogWrite(40, 250); //Making motor1 run on a relative speed of 250
+        analogWrite(41, 250); //Making motor2 run on a relative speed of 250
+    }
+    while(){
+        analogWrite(40, 250); //Making motor1 run on a relative speed of 250
+    }
+    while(){
+        analogWrite(40, 250); //Making motor1 run on a relative speed of 250
+    }
+    while(){
+        analogWrite(40, 250); //Making motor1 run on a relative speed of 250
+    }
+    while(){
+        analogWrite(40, 250); //Making motor1 run on a relative speed of 250
+    }
 
 
-  //prob chosing direction
-  digitalWrite(motor1pin1, HIGH);
-  digitalWrite(motor1pin2, LOW);
 
-  digitalWrite(motor2pin1, HIGH);
-  digitalWrite(motor2pin2, LOW);
+    //Controlling speed (0   = off and 255 = max speed):     
+    analogWrite(9, 100); //ENA   pin
+    analogWrite(10, 200); //ENB pin
 
-  //i assume its how long the engines run for, prob 3000 miliseconds?
-  delay(3000);
 
-  //i assume changing direction for the other direction which we chose before.
-  digitalWrite(motor1pin1, LOW);
-  digitalWrite(motor1pin2, HIGH);
 
-  digitalWrite(motor2pin1, LOW);
-  digitalWrite(motor2pin2, HIGH);
-
-  //i assume its how long the engines run for, prob 3000 miliseconds?
-  delay(3000);
 }
 
 void definePin(char trig,char echo){
@@ -83,7 +102,6 @@ int distanceMeasure(int echoPin,int trigPin){
 
     long duration; // Variable to store time taken to the pulse to reach receiver
     int distance; // Variable to store distance calculated using formula
-
 
 	digitalWrite(trigPin, LOW);
 	delayMicroseconds(2); // wait for 2 ms to avoid collision in serial monitor
