@@ -7,51 +7,35 @@
 int motor1pin1 = 3;
 
 
-//Variables to store the distance for each sensors
-int distance_N;
-int distance_NW;
-int distance_NE;
-int distance_W;
-int distance_E;
-
-
 void setup() {
-    
-    // Setting the echo/trig pin to their respective OUTPUT/INPUT
-    definePin(echoPin_N,trigPin_N);
-
-
-
     // Serial Communication is starting with 9600 of
     // baudrate speed
-    Serial.begin(9600);
+  Serial.begin(9600);
 
-    delay(500);
-
-    pinMode(motor1pin1, OUTPUT);
+  delay(500);
+  definePin(trigPin_N,echoPin_N);
+  pinMode(motor1pin1, OUTPUT);
 
 }
 
 void loop() {
 
-    distance_N = distanceMeasure(10,9);
-
     //Clockwise motion
-    while(distanceMeasure(10,9) < 10){
-        digitalWrite(motor1pin1, HIGH);
-    }
-
+  while(distanceMeasure(echoPin_N,trigPin_N) < 10){
+    digitalWrite(motor1pin1, HIGH);
+    Serial.println(distanceMeasure(echoPin_N,trigPin_N));
+  }
 }
 
-void definePin(char trig,char echo){
-    pinMode(trig, OUTPUT); // Sets the trigPin as an OUTPUT
-    pinMode(echo, INPUT);  // Sets the echoPin as an INPUT
+void definePin(int trig,int echo){
+  pinMode(trig, OUTPUT); // Sets the trigPin as an OUTPUT
+  pinMode(echo, INPUT);  // Sets the echoPin as an INPUT
 }
 
 int distanceMeasure(int echoPin,int trigPin){
 
-    long duration; // Variable to store time taken to the pulse to reach receiver
-    int distance; // Variable to store distance calculated using formula
+  long duration; // Variable to store time taken to the pulse to reach receiver
+  int distance; // Variable to store distance calculated using formula
 
 	digitalWrite(trigPin, LOW);
 	delayMicroseconds(2); // wait for 2 ms to avoid collision in serial monitor
@@ -69,6 +53,6 @@ int distanceMeasure(int echoPin,int trigPin){
 	duration = pulseIn(echoPin, HIGH);
 	distance = duration * 0.0344 / 2; // Expression to calculate distance using time
 
-    return distance;
+  return distance;
 
 }
