@@ -8,9 +8,8 @@ int motor1pin1 = 3;
 
 
 void setup() {
-    // Serial Communication is starting with 9600 of
-    // baudrate speed
-  definePin(trigPin_N,echoPin_N);
+  pinMode(echoPin_N, OUTPUT); // Sets the trigPin as an OUTPUT
+  pinMode(trigPin_N, INPUT);  // Sets the echoPin as an INPUT
   pinMode(motor1pin1, OUTPUT);
 
 
@@ -26,17 +25,19 @@ void setup() {
 void loop() {
 
     //Clockwise motion
-  while(distanceMeasure(echoPin_N,trigPin_N) < 10){
+  if(distanceMeasure(echoPin_N,trigPin_N) < 10){
     digitalWrite(motor1pin1, HIGH);
     Serial.println(distanceMeasure(echoPin_N,trigPin_N));
   }
 }
 
-void definePin(int trig,int echo){
+/*
+  void definePin(int echo,int trig){
   pinMode(trig, OUTPUT); // Sets the trigPin as an OUTPUT
   pinMode(echo, INPUT);  // Sets the echoPin as an INPUT
   Serial.println("DEFINE PIN PASS");
 }
+*/
 
 int distanceMeasure(int echoPin,int trigPin){
 
