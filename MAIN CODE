@@ -68,7 +68,7 @@ void loop() {
     digitalWrite(motor2pin2, LOW);
 
     if(postion == 0){
-	if(distance_N > 100){
+        if(distance_N > 100){
             analogWrite(40, 250); //Making motor1 run on a relative speed of 250
             analogWrite(41, 250); //Making motor2 run on a relative speed of 250
         }
@@ -77,34 +77,67 @@ void loop() {
             if(distance_NE < 100 && distance_NW < 100){
                 analogWrite(40, 0); //Making motor1 run on a relative speed of 250
                 analogWrite(41, 0); //Making motor2 run on a relative speed of 250
+                if(distance_E){
+                    analogWrite(40, 250); //Making motor1 run on a relative speed of 250
+                    analogWrite(41, 0); //Making motor1 run on a relative speed of 250                    
+                }
+                if(distance_W){
+                    analogWrite(40, 0); //Making motor1 run on a relative speed of 250
+                    analogWrite(41, 250); //Making motor1 run on a relative speed of 250                    
+                }
+            }
+            if(distance_NE > 100){
+                analogWrite(40, 250); //Making motor1 run on a relative speed of 250
+                analogWrite(41, 100); //Making motor1 run on a relative speed of 250
+                delay(5000);
+                analogWrite(40, 100); //Making motor1 run on a relative speed of 250
+                analogWrite(41, 250); //Making motor1 run on a relative speed of 250
+                delay(5000);
+                position = 1;
+
+            }
+            if(distance_NW > 100){
+                analogWrite(40, 100); //Making motor1 run on a relative speed of 250
+                analogWrite(41, 250); //Making motor1 run on a relative speed of 250
+                delay(5000);
+                analogWrite(40, 250); //Making motor1 run on a relative speed of 250
+                analogWrite(41, 100); //Making motor1 run on a relative speed of 250
+                delay(5000);
+                position = 2;
+            }
         }
-        if(distance_NE < 100){
-	analogWrite(40, 0); //Making motor1 run on a relative speed of 250
+    }
 
+    if(position == 1){
+        if(distance_NW > 100){
+            analogWrite(40, 250); //Making motor1 run on a relative speed of 250
+            analogWrite(41, 250); //Making motor1 run on a relative speed of 250
         }
-        if(distance_NW < 100){
-
-        }    
-	position = 1;
+        else{
+            analogWrite(40, 100); //Making motor1 run on a relative speed of 250
+            analogWrite(41, 250); //Making motor1 run on a relative speed of 250
+            delay(5000);
+            analogWrite(40, 250); //Making motor1 run on a relative speed of 250
+            analogWrite(41, 100); //Making motor1 run on a relative speed of 250
+            delay(5000);
+            position = 0;
+        }
     }
-    if(){
-        analogWrite(40, 250); //Making motor1 run on a relative speed of 250
+    if(position == 2){
+        if(distance_NE > 100){
+            analogWrite(40, 250); //Making motor1 run on a relative speed of 250
+            analogWrite(41, 250); //Making motor1 run on a relative speed of 250
+        }
+        else{
+            analogWrite(40, 250); //Making motor1 run on a relative speed of 250
+            analogWrite(41, 100); //Making motor1 run on a relative speed of 250
+            delay(5000);
+            analogWrite(40, 100); //Making motor1 run on a relative speed of 250
+            analogWrite(41, 250); //Making motor1 run on a relative speed of 250
+            delay(5000);
+            position = 0;
+        }
     }
-    if(){
-        analogWrite(40, 250); //Making motor1 run on a relative speed of 250
-    }
-    if(){
-        analogWrite(40, 250); //Making motor1 run on a relative speed of 250
-    }
-
-
-
-    //Controlling speed (0   = off and 255 = max speed):     
-    analogWrite(9, 100); //ENA   pin
-    analogWrite(10, 200); //ENB pin
-
-
-
 }
 
 void definePin(char trig,char echo){
