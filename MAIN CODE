@@ -29,11 +29,18 @@ int distance_E;
 void setup() {
     
     // Setting the echo/trig pin to their respective OUTPUT/INPUT
-    definePin(echoPin_N,trigPin_N);
-    definePin(echoPin_NW,trigPin_NW);
-    definePin(echoPin_NE,trigPin_NE);
-    definePin(echoPin_W,trigPin_W);
-    definePin(echoPin_E,trigPin_E);
+    // Sets the echoPin as an INPUT 
+    // Sets the echoPin as an INPUT   
+    pinMode(echoPin_N, OUTPUT); 
+    pinMode(trigPin_N, INPUT);    
+    pinMode(echoPin_NW, OUTPUT); 
+    pinMode(trigPin_NW, INPUT);  
+    pinMode(echoPin_NE, OUTPUT); 
+    pinMode(trigPin_NE, INPUT);  
+    pinMode(echoPin_W, OUTPUT); 
+    pinMode(trigPin_W, INPUT);  
+    pinMode(echoPin_E, OUTPUT);
+    pinMode(trigPin_E, INPUT);  
 
     int position = 0;
 
@@ -138,11 +145,6 @@ void loop() {
             position = 0;
         }
     }
-}
-
-void definePin(char trig,char echo){
-    pinMode(trig, OUTPUT); // Sets the trigPin as an OUTPUT
-    pinMode(echo, INPUT);  // Sets the echoPin as an INPUT
 }
 
 int distanceMeasure(int echoPin,int trigPin){
