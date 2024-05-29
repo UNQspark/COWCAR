@@ -62,6 +62,7 @@ void setup() {
 
 void loop() {
 
+    //Measuring distance from each angle at the start of each loop
     distance_N = distanceMeasure(2,3);
     distance_NW = distanceMeasure(4,5);
     distance_NE = distanceMeasure(6,7);
@@ -74,41 +75,37 @@ void loop() {
     digitalWrite(motor2pin1, HIGH);
     digitalWrite(motor2pin2, LOW);
 
+    //Going forward at full speed if area is cleared
+    //Position keeps track if we are against a wall or just going past an obsticle(experimental)
     if(postion == 0){
         if(distance_N > 100){
             analogWrite(40, 250); //Making motor1 run on a relative speed of 250
             analogWrite(41, 250); //Making motor2 run on a relative speed of 250
         }
 
+	//If the area infront is blocked it checks each and every scenario and acts aproprietly
         if(distance_N < 100){
             if(distance_NE < 100 && distance_NW < 100){
-                analogWrite(40, 0); //Making motor1 run on a relative speed of 250
-                analogWrite(41, 0); //Making motor2 run on a relative speed of 250
-                if(distance_E){
-                    analogWrite(40, 250); //Making motor1 run on a relative speed of 250
-                    analogWrite(41, 0); //Making motor1 run on a relative speed of 250                    
-                }
-                if(distance_W){
-                    analogWrite(40, 0); //Making motor1 run on a relative speed of 250
-                    analogWrite(41, 250); //Making motor1 run on a relative speed of 250                    
-                }
+                analogWrite(40, 0); //Making motor1 run on a relative speed of 0
+                analogWrite(41, 0); //Making motor2 run on a relative speed of 0
+		//maybe implement reverse
             }
             if(distance_NE > 100){
-                analogWrite(40, 250); //Making motor1 run on a relative speed of 250
-                analogWrite(41, 100); //Making motor1 run on a relative speed of 250
+                analogWrite(40, 250); 
+                analogWrite(41, 100); 
                 delay(5000);
-                analogWrite(40, 100); //Making motor1 run on a relative speed of 250
-                analogWrite(41, 250); //Making motor1 run on a relative speed of 250
+                analogWrite(40, 100);
+                analogWrite(41, 250);
                 delay(5000);
                 position = 1;
 
             }
             if(distance_NW > 100){
-                analogWrite(40, 100); //Making motor1 run on a relative speed of 250
-                analogWrite(41, 250); //Making motor1 run on a relative speed of 250
+                analogWrite(40, 100);
+                analogWrite(41, 250); 
                 delay(5000);
-                analogWrite(40, 250); //Making motor1 run on a relative speed of 250
-                analogWrite(41, 100); //Making motor1 run on a relative speed of 250
+                analogWrite(40, 250);
+                analogWrite(41, 100); 
                 delay(5000);
                 position = 2;
             }
